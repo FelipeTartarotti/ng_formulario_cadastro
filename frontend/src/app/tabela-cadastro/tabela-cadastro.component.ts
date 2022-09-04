@@ -1,4 +1,4 @@
-import { ListaClientesService } from './../lista-clientes/lista-clientes.service';
+import { ListaClientesService } from '../services/lista-clientes.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class TabelaCadastroComponent implements OnInit {
   clientes: any;
 
-  constructor(private service: ListaClientesService) { }
+  constructor(public listaClientesService:ListaClientesService) { }
 
   ngOnInit(): void {
-    this.clientes = this.service.clientes;
+    console.log("teste")
+    this.clientes = this.listaClientesService.clientes;
+    console.log(this.clientes)
   }
+
+
 
 }

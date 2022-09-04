@@ -1,4 +1,4 @@
-import { ListaClientesService } from './../lista-clientes/lista-clientes.service';
+import { ListaClientesService } from '../services/lista-clientes.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -16,9 +16,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  registrarCliente($event: any) {
-    this.clientes.adicionar($event);
-    console.log('app-home-component - Registrar cliente');
-  }
+
 
 }

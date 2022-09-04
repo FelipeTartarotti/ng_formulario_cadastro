@@ -1,5 +1,5 @@
 import { TabelaCadastroComponent } from './../tabela-cadastro/tabela-cadastro.component';
-import { ListaClientesService } from './../lista-clientes/lista-clientes.service';
+import { ListaClientesService } from '../services/lista-clientes.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -8,7 +8,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./cadastro.component.css']
 })
 export class CadastroComponent implements OnInit {
-  @Output() aoListaDeClientes: EventEmitter<any> = new EventEmitter();
 
   nome: string = '';
   sobrenome: string = '';
@@ -16,18 +15,18 @@ export class CadastroComponent implements OnInit {
   email: string = '';
   telefone: string = '';
 
-  constructor() { }
+  constructor(public listaClientesService:ListaClientesService) { }
 
   ngOnInit(): void {
   }
 
   registrar() {
-    const clienteEmitir = {
+    const cliente = {
       nome: this.nome, sobrenome: this.sobrenome, pis: this.pis,
       email: this.email, telefone: this.telefone
     };
 
-    this.aoListaDeClientes.emit(clienteEmitir);
+    this.listaClientesService.adicionar(cliente)
 
     console.log(`app-cadastro-component - Registrar`);
 
