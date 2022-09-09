@@ -15,8 +15,8 @@ export class CadastroComponent implements OnInit {
   public clenteForm = new FormGroup({
     nome: new FormControl("", Validators.required),
     sobrenome: new FormControl("", Validators.required),
-    pis: new FormControl("", [Validators.required, Validators.minLength(5)]),
-    email: new FormControl("", Validators.required),
+    pis: new FormControl("", [Validators.required, Validators.minLength(5), Validators.maxLength(10)]),
+    email: new FormControl("", [Validators.required, Validators.email]),
     telefone: new FormControl("", Validators.required),
   });
 
@@ -38,6 +38,10 @@ export class CadastroComponent implements OnInit {
 
   limparRegistro() {
     this.clenteForm.reset()
+  }
+
+  remover(){
+    alert("Remover")
   }
 
 }
