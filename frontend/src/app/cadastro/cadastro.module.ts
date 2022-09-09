@@ -1,5 +1,5 @@
 import { TabelaCadastroModule } from './../tabela-cadastro/tabela-cadastro.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -15,7 +15,8 @@ import { CadastroComponent } from './cadastro.component';
     CommonModule,
     CadastroRoutingModule,
     FormsModule,
-    TabelaCadastroModule
+    TabelaCadastroModule,
+    ReactiveFormsModule
   ],
   exports: [
     CadastroComponent

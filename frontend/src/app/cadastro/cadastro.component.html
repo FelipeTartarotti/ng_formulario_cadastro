@@ -1,48 +1,58 @@
 <div class="container-fluid">
-
   <div class="text-left">
     <h4>Faça o cadastro do cliente</h4>
   </div>
 
-  <form (ngSubmit)="registrar()">
+  <form [formGroup]="clenteForm">
     <div class="mb-4">
       <h6>Nome e PIS</h6>
 
       <div class="row">
         <div class="col">
-          <input id="nome" type="text" class="form-control" placeholder="Nome" aria-label="Nome" [(ngModel)]="nome"
-            name="nome">
+          <input id="nome" type="text" class="form-control" placeholder="Nome" aria-label="Nome" formControlName="nome"
+            name="nome" />
+            <div class="validation" *ngIf="!this.clenteForm.get('nome')?.valid && this.clenteForm.get('nome')?.touched">
+              {{invalidField}}
+            </div>
         </div>
+
         <div class="col">
           <input id="sobrenome" type="text" class="form-control" placeholder="Sobrenome" aria-label="Sobrenome"
-            [(ngModel)]="sobrenome" name="sobrenome">
+            formControlName="sobrenome" name="sobrenome" />
         </div>
-      </div><br>
+      </div>
+      <br />
 
-      <div class="form-control">
-        <input id="pis" type="text" placeholder="pis" [(ngModel)]="pis" name="pis">
-      </div><br>
+      <div>
+        <input class="form-control" id="pis" type="text" placeholder="pis" formControlName="pis" name="pis" />
+        <div class="validation" *ngIf="!this.clenteForm.get('pis')?.valid">
+          {{invalidField}} - O tamanho mínimo é 5
+        </div>
+      </div>
+
+      <br />
 
       <h6>Contato</h6>
 
       <div class="row">
-
         <div class="col">
           <label class="form-label">Email</label>
-          <input id="email" type="text" class="form-control" placeholder="name@email.com" [(ngModel)]="email"
-            name="email">
+          <input id="email" type="text" class="form-control" placeholder="name@email.com" formControlName="email"
+            name="email" />
         </div>
 
         <div class="col">
           <label class="form-label">Telefone</label>
-          <input id="telefone" type="text" class="form-control" placeholder="(xx)xxxxx-xxxx" [(ngModel)]="telefone"
-            name="telefone">
+          <input id="telefone" type="text" class="form-control" placeholder="(xx)xxxxx-xxxx" formControlName="telefone"
+            name="telefone" />
         </div>
-
-      </div><br>
+      </div>
+      <br />
 
       <div>
-        <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+        <button type="submit" class="btn btn-primary btn-block" (click)="this.registrar()">
+          Registrar
+        </button>
       </div>
     </div>
   </form>

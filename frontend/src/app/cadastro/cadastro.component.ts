@@ -1,6 +1,7 @@
 import { TabelaCadastroComponent } from './../tabela-cadastro/tabela-cadastro.component';
 import { ListaClientesService } from '../services/lista-clientes.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastro',
@@ -9,12 +10,15 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class CadastroComponent implements OnInit {
   @Output() aoListaDeClientes: EventEmitter<any> = new EventEmitter();
+  public invalidField = "Campo inválido"
 
-  nome: string = '';
-  sobrenome: string = '';
-  pis: string = '';
-  email: string = '';
-  telefone: string = '';
+  public clenteForm = new FormGroup({
+    nome: new FormControl("", Validators.required),
+    sobrenome: new FormControl("", Validators.required),
+    pis: new FormControl("", [Validators.required, Validators.minLength(5)]),
+    email: new FormControl("", Validators.required),
+    telefone: new FormControl("", Validators.required),
+  });
 
   constructor(private listaClientesService: ListaClientesService) { }
 
@@ -22,18 +26,18 @@ export class CadastroComponent implements OnInit {
   }
 
   registrar() {
-    const clienteEmitir = {
-      nome: this.nome, sobrenome: this.sobrenome, pis: this.pis,
-      email: this.email, telefone: this.telefone
-    };
+    if(!this.clenteForm.valid){
+      alert("Formulário inválido, preencha todos os campos")
+      return
+    }
 
-    this.listaClientesService.adicionar(clienteEmitir)
+    this.listaClientesService.adicionar(this.clenteForm.getRawValue())
 
     this.limparRegistro();
   }
 
   limparRegistro() {
-    this.nome = this.sobrenome = this.pis = this.telefone = this.email = '';
+    this.clenteForm.reset()
   }
 
 }
